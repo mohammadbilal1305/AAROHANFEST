@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AAROHAN — College Cultural Fest</title>
+  <meta name="description" content="AAROHAN - Dancing, Singing (Rap), Poetry, Quiz, Acting/Dubbing, Sketch Making" />
+  <style>
+    :root{
+      --bg:#0f1724; /* deep navy */
+      --card:#0b1220;
+      --accent:#ff6b6b; /* warm coral */
+      --accent-2:#6be7ff; /* cyan */
+      --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: radial-gradient(1200px 500px at 10% 10%, rgba(107,231,255,0.03), transparent),
+                  linear-gradient(180deg, #071226 0%, #04111a 100%);
+      color:#e6eef6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .container{max-width:var(--maxw);margin:32px auto;padding:24px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:68px;height:68px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#081426;box-shadow:0 6px 18px rgba(6,12,22,0.6);
+    }
+    h1{font-size:28px;margin:0}
+    p.lead{margin:0;color:var(--muted)}
+
+    nav{display:flex;gap:12px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#081426;border:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;margin-top:22px;align-items:center}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(3,6,12,0.6)}
+    .hero h2{font-size:34px;margin:0 0 8px}
+    .features{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .chip{padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--muted);font-size:13px}
+
+    /* cards grid */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+    @media (max-width:980px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+    .card h3{margin:0 0 8px}
+    .card p{color:var(--muted);margin:0 0 12px}
+    .icon{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-weight:700}
+
+    /* quiz categories */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap}
+    .tab{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer}
+    .tab.active{background:rgba(255,255,255,0.03);color:#fff}
+
+    /* schedule & registration */
+    .two-col{display:grid;grid-template-columns:1fr 380px;gap:18px;margin-top:18px}
+    @media (max-width:980px){.two-col{grid-template-columns:1fr}}
+
+    form{display:flex;flex-direction:column;gap:10px}
+    input,select,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:10px;color:inherit}
+    input::placeholder{color:var(--muted)}
+    .row{display:flex;gap:8px}
+
+    footer{margin-top:28px;padding:18px;text-align:center;color:var(--muted)}
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,12,0.6);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal{background:linear-gradient(180deg,#071126,#051018);padding:18px;border-radius:12px;max-width:720px;width:100%;border:1px solid rgba(255,255,255,0.04)}
+
+    /* subtle animations */
+    .fade-in{animation:fade .7s both}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+    /* accessibility focus */
+    :focus{outline:3px solid rgba(107,231,255,0.12);outline-offset:2px}
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .center{display:flex;align-items:center;justify-content:center}
+
+    /* badges */
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">A+</div>
+        <div>
+          <h1>AAROHAN</h1>
+          <p class="lead">Inter-college cultural showcase — Dancing, Singing (Rap), Poetry & more</p>
+        </div>
+      </div>
+      <nav>
+        <button class="btn" onclick="scrollToSection('events')">Events</button>
+        <button class="btn" onclick="scrollToSection('schedule')">Schedule</button>
+        <button class="btn" onclick="scrollToSection('register')">Register</button>
+        <button class="btn primary" onclick="openModal('registerModal')">Quick Join</button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card fade-in">
+        <h2>Welcome to <span style="background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent">AAROHAN</span></h2>
+        <p class="muted">A day of rhythm, words and creativity. Compete or cheer — here are the main segments.</p>
+        <div class="features" aria-hidden>
+          <div class="chip">Dancing</div>
+          <div class="chip">Singing (Rap)</div>
+          <div class="chip">Poetry</div>
+          <div class="chip">Quiz</div>
+          <div class="chip">Acting/Dubbing</div>
+          <div class="chip">Sketch Making</div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
+          <div class="badge">Date: <strong>To be decided</strong></div>
+          <div class="badge">Venue: Auditorium</div>
+        </div>
+
+        <div style="margin-top:16px;display:flex;gap:8px">
+          <button class="btn primary" onclick="scrollToSection('register')">Register Now</button>
+          <button class="btn" onclick="openModal('rulesModal')">Rules & Guidelines</button>
+        </div>
+      </div>
+
+      <aside class="hero-card fade-in" role="complementary" aria-label="Quick facts">
+        <h3>Quick Facts</h3>
+        <p class="muted">Open to all college students. Solo and team categories available. Judges from alumni and faculty.</p>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+          <div style="flex:1;min-width:120px;text-align:center">
+            <div style="font-size:20px;font-weight:700" id="counterParticipants">124</div>
+            <div class="muted">Registered</div>
+          </div>
+          <div style="flex:1;min-width:120px;text-align:center">
+            <div style="font-size:20px;font-weight:700" id="counterEvents">6</div>
+            <div class="muted">Segments</div>
+          </div>
+          <div style="flex:1;min-width:120px;text-align:center">
+            <div style="font-size:20px;font-weight:700">₹0</div>
+            <div class="muted">Registration Fee</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Events -->
+    <section id="events">
+      <h2 style="margin-top:20px">Events & Details</h2>
+      <div class="grid" role="list">
+
+        <article class="card" role="listitem">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" style="background:linear-gradient(135deg,#ff9a9e,#fecfef)">💃</div>
+            <div>
+              <h3>Dancing</h3>
+              <p class="muted">Solo and group categories. Time limit: 4–6 minutes. Judged on choreography, synchronization and presentation.</p>
+              <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" onclick="openDetail('Dancing')">More</button></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" style="background:linear-gradient(135deg,#ffd6a5,#fdffb6)">🎤</div>
+            <div>
+              <h3>Singing (Rap)</h3>
+              <p class="muted">Performance length: 3–5 minutes. Original or cover rap allowed. Lyrics and delivery will be evaluated.</p>
+              <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" onclick="openDetail('Rap')">More</button></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" style="background:linear-gradient(135deg,#caffbf,#9bf6ff)">✍️</div>
+            <div>
+              <h3>Poetry</h3>
+              <p class="muted">Spoken word and slam poetry. Time limit: 3 minutes. Emphasis on originality, emotion and stage presence.</p>
+              <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" onclick="openDetail('Poetry')">More</button></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" style="background:linear-gradient(135deg,#bdb2ff,#ffc6ff)">❓</div>
+            <div>
+              <h3>Quiz</h3>
+              <p class="muted">Four quick rounds: Sports, Bollywood, General Knowledge, Rapid Fire. Team size: up to 4.</p>
+              <div class="tabs" style="margin-top:8px">
+                <button class="tab active" data-cat="Sports" onclick="selectQuizCat(event)">Sports</button>
+                <button class="tab" data-cat="Bollywood" onclick="selectQuizCat(event)">Bollywood</button>
+                <button class="tab" data-cat="GK" onclick="selectQuizCat(event)">General Knowledge</button>
+                <button class="tab" data-cat="Rapid" onclick="selectQuizCat(event)">Rapid Fire</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" style="background:linear-gradient(135deg,#ffd6d6,#ffe8a1)">🎭</div>
+            <div>
+              <h3>Acting / Dubbing</h3>
+              <p class="muted">Short scenes and dubbing challenges. Props permitted. Time limit: 5 minutes.</p>
+              <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" onclick="openDetail('Acting')">More</button></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" style="background:linear-gradient(135deg,#c6f7e2,#d6c8ff)">🖼️</div>
+            <div>
+              <h3>Sketch Making</h3>
+              <p class="muted">Live sketching — portrait and theme-based rounds. Materials allowed: pencils, charcoal, basic colors.</p>
+              <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" onclick="openDetail('Sketch')">More</button></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Schedule + Register -->
+    <section id="schedule" class="two-col">
+      <div>
+        <h2 style="margin-top:18px">Schedule</h2>
+        <div class="card" style="margin-top:12px">
+          <h3>Provisional Timings</h3>
+          <ol class="muted">
+            <li>09:00 — Inauguration & Welcome</li>
+            <li>09:30 — Dancing (Prelims)</li>
+            <li>11:30 — Singing (Rap)</li>
+            <li>13:00 — Lunch Break</li>
+            <li>14:00 — Poetry & Acting</li>
+            <li>15:30 — Quiz Finals</li>
+            <li>17:00 — Sketch Making Display</li>
+            <li>18:00 — Prize Distribution & Closing</li>
+          </ol>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3>Judging Criteria</h3>
+          <p class="muted">Each event will have tailored criteria — creativity, technical skill, stage presence and audience impact are common factors.</p>
+        </div>
+      </div>
+
+      <aside id="register" class="card" aria-labelledby="regTitle">
+        <h3 id="regTitle">Register</h3>
+        <form id="regForm" onsubmit="submitForm(event)" novalidate>
+          <input type="text" id="name" placeholder="Full name" required />
+          <input type="email" id="email" placeholder="Email" required />
+          <div class="row">
+            <input type="text" id="college" placeholder="College / Institution" required />
+            <input type="tel" id="phone" placeholder="Phone" />
+          </div>
+          <label for="eventSelect" class="muted">Select Event</label>
+          <select id="eventSelect" required>
+            <option value="Dancing">Dancing</option>
+            <option value="Rap">Singing (Rap)</option>
+            <option value="Poetry">Poetry</option>
+            <option value="Quiz">Quiz</option>
+            <option value="Acting">Acting / Dubbing</option>
+            <option value="Sketch">Sketch Making</option>
+          </select>
+          <textarea id="notes" rows="3" placeholder="Team members / notes (optional)"></textarea>
+          <button type="submit" class="btn primary">Submit Registration</button>
+        </form>
+        <p id="formMsg" class="muted" style="margin-top:8px"></p>
+      </aside>
+    </section>
+
+    <div style="margin-top:18px" class="card">
+      <h3>Contact & Venue</h3>
+      <p class="muted">For queries: <a href="mailto:aarohan@college.edu" style="color:inherit;text-decoration:underline">aarohan@college.edu</a> — Venue: Main Auditorium</p>
+    </div>
+
+    <footer>
+      <small>© AAROHAN — Made with ❤️ for the college community</small>
+    </footer>
+  </div>
+
+  <!-- Modals -->
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document">
+      <button class="btn" style="float:right" onclick="closeModal()">Close</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // Small JS to make the page interactive
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalContent = document.getElementById('modalContent');
+
+    function openModal(id){
+      let html = '';
+      if(id === 'registerModal'){
+        html = `<h3>Quick Join</h3><p class="muted">Fill the registration form on the right or email us at aarohan@college.edu</p>`;
+      } else if(id === 'rulesModal'){
+        html = `<h3>Rules & Guidelines</h3><ul class="muted"><li>Re
